@@ -1,0 +1,14 @@
+<div class = "container">
+  {{#if main}}
+    <div class = "stories">
+      {{#each stories}}
+        <div class = "story">
+          <a href = "/article/{{this._id}}"><h2>{{this.title}}</h2></a>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    {{> article}}
+    {{> commentForm}}
+  {{/if}}
+</div>

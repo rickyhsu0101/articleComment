@@ -1,0 +1,21 @@
+<div class = "container">
+  {{#each comments}}
+    <div class = "container">
+      <h4>{{this.user}}</h4>
+      <p>{{this.text}}</p>
+    </div>
+  {{/each}}
+</div>
+<div class = "container">
+  <form action="/article/{{_id}}/comment" method="POST">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" placeholder="Enter username" name = "user">
+    </div>
+    <div class="form-group">
+      <label for="comment">Comment</label>
+      <textarea class="form-control" id="comment" rows="4" name = "comment"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
