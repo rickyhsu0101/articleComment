@@ -14,8 +14,21 @@ app.engine("handlebars", exphbs({
   defaultLayout: "main"
 }));
 app.set("view engine", "handlebars");
-mongoose.connect("mongodb://localhost/article");
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+// Set mongoose to leverage built in JavaScript ES6 Promises
+// Connect to the Mongo DB
+mongoose.Promise = Promise;
+
+
+mongoose.connect(MONGODB_URI);
+
 let models = require("./models/index.js");
+app.get("/scrape", function(req, res){
+  require("./config/articleScraper.js");
+  res.redirect("/");
+});
 app.get("/", function(req, res){
   var hbsob = {
     main: true
@@ -52,6 +65,6 @@ app.get("/article/:id", function(req, res){
     res.render("index", hbsob);
   });
 }); 
-app.listen(8080, function(){
+app.listen(process.env.PORT || 5000, function () {
   console.log("App listening on 8080");
 });
